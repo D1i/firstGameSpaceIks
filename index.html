@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <style>
+        body {
+            height: 100vh;
+            height: 100%;
+        }
+
+        .state {
+            width: 300px;
+            height: 300px;
+            background-color: aquamarine;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: absolute;
+            top: 90px;
+            right: 0;
+        }
+
+        .state > div {}
+
+        .player {
+            width: 50px;
+            height: 200px;
+            background: #ccc url("img/player.jpg") center no-repeat;
+            -webkit-background-size: 50px;
+            background-size: 50px;
+            transform-origin: center;
+            position: absolute;
+        }
+
+        .infoOfSpaceShipsContainer {
+            position: absolute;
+            top: 0;
+            right: 0;
+        }
+
+        .infoOfSpaceShips {
+            position: relative;
+            width: 33px;
+            height: 80px;
+            background-color: beige;
+
+        }
+
+        .module1,
+        .module2,
+        .module3,
+        .module4,
+        .module5,
+        .module6 {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #0F0;
+        }
+
+        .module1 {
+            right: 0;
+            top: 0;
+        }
+
+        .module2 {
+            right: 11px;
+            top: 0;
+        }
+
+        .module3 {
+            left: 0;
+            top: 0;
+        }
+
+        .module4 {
+            right: 0;
+            bottom: 0;
+        }
+
+        .module5 {
+            right: 11px;
+            bottom: 0;
+        }
+
+        .module6 {
+            left: 0;
+            bottom: 0;
+        }
+
+        .settingGame {
+            width: 300px;
+            height: 300px;
+            background-color: teal;
+            display: flex;
+            position: absolute;
+            right: calc(50% - 150px);
+            top: calc(50vh - 150px);
+            display: none;
+        }
+
+    </style>
+    <title>!!!!!!!!!!!!!!!!!!!!</title>
+</head>
+<body>
+<div class="state">ERROR</div>
+<div class="player"></div>
+<div class="infoOfSpaceShipsContainer">
+<div class="infoOfSpaceShips">
+    <div class="module1"></div>
+    <div class="module2"></div>
+    <div class="module3"></div>
+    <div class="module4"></div>
+    <div class="module5"></div>
+    <div class="module6"></div>
+</div>
+</div>
+<div class="settingGame">
+    <input type="checkbox" class="muteGame" checked><div>MUTE GAME</div>
+    <input type="checkbox" class="hidenHUG"><div>HIDEN HUG</div>
+</div>
+<audio class="audioEngen" style="width: 100px; height: 20px; display: block;" controls="controls" autoplay loop="loop" src="music/manevr.mp3"></audio>
+<script src="index.js"></script>
+</body>
+</html>
