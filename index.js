@@ -2,34 +2,42 @@
 
 // rules 100000 units === 1m/s
 
-alert(`Привет человек!
-Поставь английскую раскладку и насслаждайся игрой !)`);
+// alert(`Привет человек!
+// Поставь английскую раскладку и насслаждайся игрой !)`);
+
+const module1 = document.querySelector(".module1");
+const module2 = document.querySelector(".module2");
+const module3 = document.querySelector(".module3");
+const module4 = document.querySelector(".module4");
+const module5 = document.querySelector(".module5");
+const module6 = document.querySelector(".module6");
+// vector ; 1 = top; 0 = stay; -1 = bottom
 
 //BTN EVENTS
 //__________________________________________
 function checkBtn(key) {
     if (key === "w") {
         vector = 1;
-        document.querySelector(".module5").style.backgroundColor = "#f00";
+        module5.style.backgroundColor = "#f00";
     }
 
     if (key === "s") {
-        document.querySelector(".module2").style.backgroundColor = "#f00";
+        module2.style.backgroundColor = "#f00";
         vector = -1;
     }
 
     if (key === "q") {
         enertingZ(20, 100, key);
 
-        document.querySelector(".module1").style.backgroundColor = "#f00";
-        document.querySelector(".module6").style.backgroundColor = "#f00";
+        module1.style.backgroundColor = "#f00";
+        module6.style.backgroundColor = "#f00";
     }
 
     if (key === "e") {
         enertingZ(20, 100, key);
 
-        document.querySelector(".module3").style.backgroundColor = "#f00";
-        document.querySelector(".module4").style.backgroundColor = "#f00";
+        module3.style.backgroundColor = "#f00";
+        module4.style.backgroundColor = "#f00";
     }
 
 }
@@ -70,7 +78,7 @@ function trakingMove(event) {
     if (event.key === "w" || event.key === "s") {
         enerting(20, 100);
     }
-    stateBlock = `<div>X: ${xSpead}</div><div>Y: ${ySpead}</div><div>z position ${zPosition.toFixed(3)}</div><div>z spead ${zSpead.toFixed(3)}</div><div>${fuel}</div><div>${event.key}</div>`;
+    stateBlock = `<div>X: ${xSpeed}</div><div>Y: ${ySpeed}</div><div>z position ${zPosition.toFixed(3)}</div><div>z speed ${zSpeed.toFixed(3)}</div><div>${fuel}</div><div>${event.key}</div>`;
     fuel -= 0.01;
 }
 
@@ -81,67 +89,67 @@ function directionalEffect(z) {
     }
 
     const angleToSpeed = 0.011111;
-    let directionalYSpead, directionalXSpead;
+    let directionalYSpeed, directionalXSpeed;
     if (z < 90) {
         if (z < 45) {
-            directionalXSpead = z * angleToSpeed;
-            directionalYSpead = (90 - z) * -angleToSpeed;
+            directionalXSpeed = z * angleToSpeed;
+            directionalYSpeed = (90 - z) * -angleToSpeed;
         } if (z === 45) {
-            directionalXSpead = 45 * -angleToSpeed;
-            directionalYSpead = 45 * -angleToSpeed;
+            directionalXSpeed = 45 * -angleToSpeed;
+            directionalYSpeed = 45 * -angleToSpeed;
         } if (z > 45) {
-            directionalYSpead = (90 - z) * -angleToSpeed;
-            directionalXSpead = z * angleToSpeed;
+            directionalYSpeed = (90 - z) * -angleToSpeed;
+            directionalXSpeed = z * angleToSpeed;
         }
     }
     if (z >= 90 && z < 180) {
         z -= 90;
         if (z < 45) {
-            directionalYSpead = z * angleToSpeed;
-            directionalXSpead = (90 - z) * angleToSpeed;
+            directionalYSpeed = z * angleToSpeed;
+            directionalXSpeed = (90 - z) * angleToSpeed;
         } if (z === 45) {
-            directionalYSpead = 45 * angleToSpeed;
-            directionalXSpead = 45 * angleToSpeed;
+            directionalYSpeed = 45 * angleToSpeed;
+            directionalXSpeed = 45 * angleToSpeed;
         } if (z > 45) {
-            directionalXSpead = (90 - z) * angleToSpeed;
-            directionalYSpead = z * angleToSpeed;
+            directionalXSpeed = (90 - z) * angleToSpeed;
+            directionalYSpeed = z * angleToSpeed;
         }
     }
     if (z >= 180 && z < 270) {
         z -= 180;
         if (z < 45) {
-            directionalXSpead = z * -angleToSpeed;
-            directionalYSpead = (90 - z) * angleToSpeed;
+            directionalXSpeed = z * -angleToSpeed;
+            directionalYSpeed = (90 - z) * angleToSpeed;
         } if (z === 45) {
-            directionalYSpead = 45 * angleToSpeed;
-            directionalXSpead = 45 * angleToSpeed;
+            directionalYSpeed = 45 * angleToSpeed;
+            directionalXSpeed = 45 * angleToSpeed;
         } if (z > 45) {
-            directionalYSpead = (90 - z) * angleToSpeed;
-            directionalXSpead = z * -angleToSpeed;
+            directionalYSpeed = (90 - z) * angleToSpeed;
+            directionalXSpeed = z * -angleToSpeed;
         }
     }
     if (z > 270) {
         z -= 270;
         if (z < 45) {
-            directionalYSpead = z * -angleToSpeed;
-            directionalXSpead = (90 - z) * -angleToSpeed;
+            directionalYSpeed = z * -angleToSpeed;
+            directionalXSpeed = (90 - z) * -angleToSpeed;
         } if (z === 45) {
-            directionalXSpead = 45 * -angleToSpeed;
-            directionalYSpead = 45 * angleToSpeed;
+            directionalXSpeed = 45 * -angleToSpeed;
+            directionalYSpeed = 45 * angleToSpeed;
         } if (z > 45) {
-            directionalXSpead = (90 - z) * -angleToSpeed;
-            directionalYSpead = z * -angleToSpeed;
+            directionalXSpeed = (90 - z) * -angleToSpeed;
+            directionalYSpeed = z * -angleToSpeed;
         }
     }
 
-    if (directionalXSpead === undefined) {
-        directionalXSpead = 0;
+    if (directionalXSpeed === undefined) {
+        directionalXSpeed = 0;
     }
-    if (directionalYSpead === undefined) {
-        directionalYSpead = 0;
+    if (directionalYSpeed === undefined) {
+        directionalYSpeed = 0;
     }
 
-    return {y: directionalYSpead, x: directionalXSpead,};
+    return {y: directionalYSpeed, x: directionalXSpeed,};
 }
 
 function enerting(mass, engenePoser) {
@@ -149,21 +157,21 @@ function enerting(mass, engenePoser) {
     const editEnert = directionalEffect(zPosition);
 
     if (vector === 1) {
-        ySpead += acceleration * editEnert.y;
-        xSpead += acceleration * editEnert.x;
+        ySpeed += acceleration * editEnert.y;
+        xSpeed += acceleration * editEnert.x;
     }
     if (vector === -1) {
-        ySpead += -acceleration * editEnert.y;
-        xSpead += -acceleration * editEnert.x;
+        ySpeed += -acceleration * editEnert.y;
+        xSpeed += -acceleration * editEnert.x;
     }
 }
 
 function enertingZ(mass, engenePoser, key) {
     let acceleration = (engenePoser / mass) / 1000;
     if (key === "e") {
-        zSpead += acceleration;
+        zSpeed += acceleration;
     } else {
-        zSpead -= acceleration;
+        zSpeed -= acceleration;
     }
 }
 //__________________________________________
@@ -237,9 +245,9 @@ function findingAnglesCoordinates (fromX, fromY, toX, toY) {
 //     let course = findingAnglesCoordinates (xPosition, yPosition, xPositionObject, yPositionObject);
 //     let accelerationRatio = directionalEffect(course);
 //
-//     ySpead += forceGravity * accelerationRatio.y;
+//     ySpeed += forceGravity * accelerationRatio.y;
 //
-//     xSpead += forceGravity * accelerationRatio.x;
+//     xSpeed += forceGravity * accelerationRatio.x;
 //
 //
 //     //return {zPosition, forceGravity};
@@ -248,10 +256,14 @@ function findingAnglesCoordinates (fromX, fromY, toX, toY) {
 //__________________________________________
 //__________________________________________
 
+function spawnShell() {
 
-let xSpead = 0;
-let ySpead = 0;
-let zSpead = 0;
+}
+
+
+let xSpeed = 0;
+let ySpeed = 0;
+let zSpeed = 0;
 let vector = 0;
 let yPosition = 100;
 let xPosition = 300;
@@ -323,10 +335,10 @@ document.addEventListener("keydown", event => {
 //RETURN DATA CYCLE
 //__________________________________________
 setInterval(() => {
-    document.querySelector(".state").innerHTML = `<div class="stateInfo">X: ${xSpead}</div>
-    <div class="stateInfo">Y: ${ySpead}</div>
+    document.querySelector(".state").innerHTML = `<div class="stateInfo">X: ${xSpeed}</div>
+    <div class="stateInfo">Y: ${ySpeed}</div>
     <div>z position ${zPosition.toFixed(3)}</div>
-    <div>z spead ${zSpead.toFixed(3)}</div>
+    <div>z speed ${zSpeed.toFixed(3)}</div>
     <div>${fuel}</div><div>emp</div>`;
 }, 200);
 //__________________________________________
@@ -337,17 +349,17 @@ setInterval(() => {
 //__________________________________________
 setInterval(() => {
 
-    zPosition += zSpead;
+    zPosition += zSpeed;
     if (zPosition > 180) {
         zPosition = -179;
     }
     if (zPosition < -180) {
         zPosition = 179;
     }
-    yPosition += ySpead;
-    xPosition += xSpead;
+    yPosition += ySpeed;
+    xPosition += xSpeed;
     document.querySelector(".player").setAttribute("style", `top: ${yPosition}px; left: ${xPosition}px; transform: rotate(${zPosition}deg);`);
-}, 10);
+}, 33);
 //__________________________________________
 //__________________________________________
 //__________________________________________
@@ -355,12 +367,12 @@ setInterval(() => {
 //OFF MODULES PLAYER CYCLE
 //__________________________________________
 setInterval(() => {
-    document.querySelector(".module1").style.backgroundColor = "#0f0";
-    document.querySelector(".module2").style.backgroundColor = "#0f0";
-    document.querySelector(".module3").style.backgroundColor = "#0f0";
-    document.querySelector(".module4").style.backgroundColor = "#0f0";
-    document.querySelector(".module5").style.backgroundColor = "#0f0";
-    document.querySelector(".module6").style.backgroundColor = "#0f0";
+    module1.style.backgroundColor = "#0f0";
+    module2.style.backgroundColor = "#0f0";
+    module3.style.backgroundColor = "#0f0";
+    module4.style.backgroundColor = "#0f0";
+    module5.style.backgroundColor = "#0f0";
+    module6.style.backgroundColor = "#0f0";
 
 },500)
 //__________________________________________
@@ -375,8 +387,8 @@ setInterval(() => {
         document.querySelector(".state").innerHTML = "OFF SYSTEM, FUEL EMPLY!";
         return;
     }
-    fuel -= 0.0001;
-}, 10);
+    fuel -= 0.003;
+}, 33);
 //__________________________________________
 //__________________________________________
 //__________________________________________
