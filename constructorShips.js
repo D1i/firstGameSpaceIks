@@ -141,29 +141,3 @@ document.querySelector(".menuOfSelect").addEventListener("click", event => {
 function getCodeOfSaveMapShip() {
     console.log(JSON.stringify(shipMapSave))
 }
-
-
-// addEventListener("click", event => {
-//     if (event.target === document.querySelector(".contexMenuConstructor") || document.querySelector(".contexMenuConstructor") === event.target.parentNode) {
-//         return
-//     }
-//     if (document.querySelector(".contexMenuConstructor")) {
-//         document.querySelector(".contexMenuConstructor").remove();
-//     }
-// })
-//
-// addEventListener("contextmenu", event => {
-//     if (document.querySelector(".contexMenuConstructor")) {
-//         document.querySelector(".contexMenuConstructor").remove();
-//     }
-//     event.preventDefault();
-//     console.log(event);
-//     document.body.innerHTML += `<div style="position: absolute; background-color: rgba(0, 0, 0, 0.5); left: ${event.screenX}px; top: ${event.screenY - 65}px;" class="contexMenuConstructor">
-//         <button>rotate left</button>
-//         <button>rotate right</button>
-//     </div>`;
-//     event.screenX;
-//     event.screenY;
-//
-// })
-
