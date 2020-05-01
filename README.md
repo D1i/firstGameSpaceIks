@@ -9,4 +9,4 @@
 #### 7. Создание фракции, технологий, сюжета игры.
 
 
-![***[Если будут вопросы то пишите сюда](https://vk.com/aniriseflugel)***](https://placehold.it/15/f03c15/000000?text=+) `#aaaaaa`
+![#cccccc](https://placehold.it/15/f03c15/000000?text=+) `***[Если будут вопросы то пишите сюда](https://vk.com/aniriseflugel)***`
