@@ -2,9 +2,12 @@
 
 let selectCell = "emplyCell.png"
 let shipMapSave = {};
+const ySize = 20;
+const xSize = 20;
+const cellSize = 20;
 
 shipMapSave = JSON.parse('{"x0 y0":"armorPlateCell.png","x1 y1":"armorPlateCell.png","x0 y2":"armorPlateCell.png","x0 y3":"armorPlateCell.png","x0 y4":"armorPlateCell.png","x2 y2":"armorPlateCell.png","x2 y3":"armorPlateCell.png","x2 y4":"armorPlateCell.png","x0 y1":"engineLeft.png","x1 y2":"controlBlock.png","x1 y3":"fuelTank.png","x1 y4":"fuelTank.png","x1 y5":"defualtCell.png","x2 y5":"fuelTank.png","x3 y5":"engineTop.png","x6 y5":"engineTop.png","x4 y6":"gun.png","x5 y6":"gun.png","x6 y6":"gunArmor.png","x3 y6":"gunArmor.png","x2 y6":"defualtCell.png","x7 y6":"defualtCell.png","x8 y5":"defualtCell.png","x7 y5":"fuelTank.png","x8 y4":"fuelTank.png","x8 y3":"fuelTank.png","x7 y4":"armorPlateCell.png","x7 y3":"armorPlateCell.png","x7 y2":"armorPlateCell.png","x9 y4":"armorPlateCell.png","x9 y3":"armorPlateCell.png","x9 y2":"armorPlateCell.png","x8 y1":"armorPlateCell.png","x9 y0":"armorPlateCell.png","x9 y1":"engineRight.png","x8 y2":"controlBlock.png","x7 y7":"engineBottom.png","x2 y7":"engineBottom.png","x6 y7":"fuelTank.png","x5 y7":"fuelTank.png","x4 y7":"fuelTank.png","x3 y7":"fuelTank.png","x4 y8":"engineBottom.png","x5 y8":"engineBottom.png","x3 y8":"engineLeft.png","x6 y8":"engineRight.png"}')
-shipMapSave = {};
+shipMapSave = {"x10 y9":"armorPlateCell.png","x9 y9":"armorPlateCell.png","x10 y10":"armorPlateCell.png","x10 y11":"armorPlateCell.png","x9 y11":"armorPlateCell.png","x8 y9":"armorPlateCell.png","x8 y10":"armorPlateCell.png","x8 y11":"armorPlateCell.png","x9 y10":"fuelTank.png"};
 
 
 function generateCells(ySize, xSize, cellSize, scale, mapObjects) {
@@ -51,7 +54,7 @@ document.body.innerHTML += `<div class="menuOfSelect" style="position: absolute;
     <div class="engine"><img src="img/engineTop.png" alt="engine" height=" 50px;" class="engine">engine</div>
     </div>`;
 
-document.querySelector(".constructorMatrice").innerHTML = generateCells(20, 20, 30, 0, 1213)
+document.querySelector(".constructorMatrice").innerHTML = generateCells(ySize, xSize, cellSize, 0, 1213)
 
 document.querySelector(".constructorMatrice").addEventListener("click", event => {
     if (event.target.style.backgroundImage === 'url("img/emplyCell.png")') {
@@ -141,3 +144,99 @@ document.querySelector(".menuOfSelect").addEventListener("click", event => {
 function getCodeOfSaveMapShip() {
     console.log(JSON.stringify(shipMapSave))
 }
+
+function findNumberInString(str) {
+    // FORMAT OF IMPUT: STR = x000 y000
+    let numbersForReturn = {};
+    for (let i = 0;  str.length > i; i++) {
+        if (12);
+        if (typeof (parseFloat(str[i])) === "number" && !isNaN(str[i])) {
+            if (str[i + 2] === "y") {
+                numbersForReturn.x = (Number(str[i]))
+            } else if (str[i + 3] === "y") {
+                numbersForReturn.x = (Number(str[i] + str[i + 1]))
+                i++
+            } else if (str[i + 4] === "y") {
+                numbersForReturn.x = (Number(str[i] + str[i + 1] +  str[i + 2]))
+                i += 2
+            }else if (str[i + 1] === "y") {
+                i++;
+            } else if (str[i + 1] === undefined) {
+                numbersForReturn.y = (Number(str[i]))
+            } else if (str[i + 2] === undefined) {
+                numbersForReturn.y = (Number(str[i] + str[i + 1]))
+                i += 2;
+            } else if (str[i + 3] === undefined) {
+                numbersForReturn.y = (Number(str[i] + str[i + 1] + str[i += 2]))
+                i += 2;
+            }
+        }
+    }
+    return numbersForReturn;
+}
+
+function ShiftShip(deviationByX, deviationByY) {
+    let setEdition = new Set();
+    let arrOriginal = [];
+    for (let key in shipMapSave) {
+        arrOriginal.push(key);
+    }
+
+    for (let key in shipMapSave) {
+        let valueProperty = shipMapSave[key];
+        if (key === "x9 y10") debugger;
+        //Все ламается потому, что у тебя при здвиге первее сдвигается боковая клетка и от того инфао прошлой клетке перезаписывется . Сейчас думаю можно сделать объект с свойствами, что будут переименновываться на 1 но при этом его значение не затрагивается.
+        let coordinates = findNumberInString(key);
+        shipMapSave[`x${coordinates.x - deviationByX} y${coordinates.y - deviationByY}`] = valueProperty;
+        setEdition.add(`x${coordinates.x - deviationByX} y${coordinates.y - deviationByY}`);
+    }
+    for (let i = 0; i < arrOriginal.length; i++) {
+        if (setEdition.has(arrOriginal[i])) {
+            delete arrOriginal[i]
+        }
+    }
+    for (let value of arrOriginal) {
+        delete shipMapSave[value];
+    }
+
+    document.querySelector(".constructorMatrice").innerHTML = generateCells(ySize, xSize, cellSize, 0, 1213)
+}
+
+function alignmentShip() {
+    let deviationByX = 0;
+    let deviationByY = 0;
+    let arrXShip = [];
+    let arrYShip = [];
+
+    let compareNumeric = function (a, b) {
+        if (a > b) return 1;
+        if (a == b) return 0;
+        if (a < b) return -1;
+    }
+
+    for (let key in shipMapSave) {
+        arrXShip.push(findNumberInString(key).x);
+        arrYShip.push(findNumberInString(key).y);
+    }
+
+
+    deviationByX = arrXShip.sort(compareNumeric)[0];
+    deviationByY = arrYShip.sort(compareNumeric)[0];
+
+    ShiftShip(deviationByX, deviationByY)
+
+    document.querySelector(".constructorMatrice").innerHTML = generateCells(ySize, xSize, cellSize, 0, 1213)
+}
+
+document.querySelector(".shiftTopConstructor").addEventListener("click", () => {
+    ShiftShip(0, 1);
+})
+document.querySelector(".shiftRightConstructor").addEventListener("click", () => {
+    ShiftShip(-1, 0);
+})
+document.querySelector(".shiftBottomConstructor").addEventListener("click", () => {
+    ShiftShip(0, -1);
+})
+document.querySelector(".shiftLeftConstructor").addEventListener("click", () => {
+    ShiftShip(1, 0);
+})
