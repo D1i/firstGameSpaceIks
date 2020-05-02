@@ -182,8 +182,9 @@ function ShiftShip(deviationByX, deviationByY) {
         arrOriginal.push(key);
     }
 
+    let copyOriginalObj = Object.assign({}, shipMapSave);
     for (let key in shipMapSave) {
-        let valueProperty = shipMapSave[key];
+        let valueProperty = copyOriginalObj[key];
         if (key === "x9 y10") debugger;
         //Все ламается потому, что у тебя при здвиге первее сдвигается боковая клетка и от того инфао прошлой клетке перезаписывется . Сейчас думаю можно сделать объект с свойствами, что будут переименновываться на 1 но при этом его значение не затрагивается.
         let coordinates = findNumberInString(key);
