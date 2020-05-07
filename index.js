@@ -12,7 +12,6 @@ const module4 = document.querySelector(".module4");
 const module5 = document.querySelector(".module5");
 const module6 = document.querySelector(".module6");
 // vector ; 1 = top; 0 = stay; -1 = bottom
-
 //BTN EVENTS
 //__________________________________________
 function checkBtn(key) {
@@ -27,14 +26,14 @@ function checkBtn(key) {
     }
 
     if (key === "q") {
-        enertingZ(20, 100, key);
+        enertingZ(MASS, ENGENE_POSER, key);
 
         module1.style.backgroundColor = "#f00";
         module6.style.backgroundColor = "#f00";
     }
 
     if (key === "e") {
-        enertingZ(20, 100, key);
+        enertingZ(MASS, ENGENE_POSER, key);
 
         module3.style.backgroundColor = "#f00";
         module4.style.backgroundColor = "#f00";
@@ -76,7 +75,7 @@ function trakingMove(event) {
     }
     checkBtn(event.key);
     if (event.key === "w" || event.key === "s") {
-        enerting(20, 100);
+        enerting(MASS, ENGENE_POSER);
     }
     stateBlock = `<div>X: ${xSpeed}</div><div>Y: ${ySpeed}</div><div>z position ${zPosition.toFixed(3)}</div><div>z speed ${zSpeed.toFixed(3)}</div><div>${fuel}</div><div>${event.key}</div>`;
     fuel -= 0.01;
@@ -195,71 +194,117 @@ function findingAnglesCoordinates (fromX, fromY, toX, toY) {
 
     let XYStatus = {x: false, y: false,};
 
-    if (x > y) {
+    // if (x > y) {
         // y-a
         // x-b
-        angle = Math.atan((y / x)) * 57.2958;
+        angle = -Math.atan((y / x)) * 57.2958;
 
-    } else {
-        // y-b
-        // x-a
-        angle = Math.atan((x / y)) * 57.2958;
-    }
 
-    if (xValid < 0 && yValid < 0) {
-        angle;
+    // } else {
+    //     // y-b
+    //     // x-a
+    //     angle = Math.atan((x / y)) * 57.2958;
+    // }
+
+    if (xValid > 0 && yValid > 0) {
+        angle = (angle - 270) * -1;
+        //console.log("1")
     }
     if (xValid > 0 && yValid < 0) {
         angle += 270;
+        //console.log("2")
     }
     if (xValid < 0 && yValid < 0) {
-        angle += 180;
+       angle = (angle - 90) * -1;
+        //console.log("3")
     }
     if (xValid < 0 && yValid > 0) {
         angle += 90;
+        //console.log("12")
     }
 
    // if (xValid === 0 && yValid === 0) { return }//STOP
     if (xValid === 0 && yValid > 0) {
         angle += 0;
+        //console.log("4")
     }
     if (xValid === 0 && yValid < 0) {
         angle += 180;
+        //console.log("5")
     }
     if (xValid > 0 && yValid === 0) {
         angle += 270;
+        //console.log("6")
     }
     if (xValid < 0 && yValid === 0) {
         angle += 90;
+        console.log("6")
     }
+
+    if (angle < 0) {
+        angle += 0;
+
+    }
+
+
+    if (document.querySelector(".gravityLine") !== null) {
+        document.querySelector(".gravityLine").remove();
+    }
+
+    //console.log(angle);
+
+    let code = `
+    <div class="gravityLine" style="position: absolute; top: ${yPosition}px; left: ${xPosition}px; width: 5px; height: 200px; background-color: blueviolet; transform: rotate(${angle}deg)" ></div>
+    `
+    document.body.innerHTML += code;
 
     return angle;
 
 }
 
-// function gravity(xPositionObject, yPositionObject, mass1, mass2) {
-//     let distance = Math.sqrt(Math.pow(xPositionObject - xPosition, 2) + Math.pow(yPositionObject - yPosition, 2));//расстояние между центрами масс тел
-//     let G = 6.67 * Math.pow(10, -11) * 10 * Math.pow(mass1, -1);// Гравитационная постоянная 6.67 *  10^-11 м3 кг^-1 с^-2
-//     let forceGravity = G * ( ( mass1 * mass2 ) / Math.pow(distance, 2) ); //Гравитационная сила
-//
-//     let course = findingAnglesCoordinates (xPosition, yPosition, xPositionObject, yPositionObject);
-//     let accelerationRatio = directionalEffect(course);
-//
-//     ySpeed += forceGravity * accelerationRatio.y;
-//
-//     xSpeed += forceGravity * accelerationRatio.x;
-//
-//
-//     //return {zPosition, forceGravity};
-// }
+function gravity(xPositionObject, yPositionObject, mass1, mass2) {
+    let distance = Math.sqrt(Math.pow(xPositionObject - xPosition, 2) + Math.pow(yPositionObject - yPosition, 2));//расстояние между центрами масс тел
+    let G = 6.67 * Math.pow(10, -11) * 10 * Math.pow(mass1, -1);// Гравитационная постоянная 6.67 *  10^-11 м3 кг^-1 с^-2
+    let forceGravity = G * ( ( mass1 * mass2 ) / Math.pow(distance, 2) ); //Гравитационная сила
+
+    let course = findingAnglesCoordinates (xPosition, yPosition, xPositionObject, yPositionObject);
+    let accelerationRatio = directionalEffect(course);
+
+    ySpeed += forceGravity * accelerationRatio.y;
+
+    xSpeed += forceGravity * accelerationRatio.x;
+
+
+    //return {zPositionzPosition, forceGravity};
+}
 //__________________________________________
 //__________________________________________
 //__________________________________________
 
-function spawnShell() {
-
+function CheckingSphericalHitbox(xSpheres, ySpheres, radiusSpheres, xObject, yObject, sizeObject) {
+    let angle = findingAnglesCoordinates(xSpheres, ySpheres, xObject, yObject);
+    let distanceBetweenPointSphereObject = Math.sqrt(Math.pow(Math.abs(ySpheres - yObject),2) + Math.pow(Math.abs(xSpheres - xObject),2));
+    if (distanceBetweenPointSphereObject < radiusSpheres) {
+        xSpeed = 0;
+        ySpeed = 0;
+    }
 }
 
+function planetLandscapeGeneration(xCoordinates, yCoordinates, planetSizes) {
+    debugger;
+    planetSizes += 200;
+    let code = "";
+    let angle = 0;
+    for (let i = 0; i < 100; i++) {
+        angle = i * (360 / 100);
+        code += `<div style="width: ${(planetSizes / 2).toFixed(0)}px; height: ${(planetSizes).toFixed(0)}px; background-color: #f00; transform: rotate(${angle}deg); top: ${xCoordinates - (planetSizes / 2).toFixed(0) + 150}px; left: ${yCoordinates - (planetSizes / 4).toFixed(0) }px; position: absolute;"></div>`
+    }
+    document.body.innerHTML += code;
+}
+
+planetLandscapeGeneration(600, 900, 500)
+
+planetLandscapeGeneration(1000, 2000, 500)
 
 let xSpeed = 0;
 let ySpeed = 0;
@@ -269,11 +314,15 @@ let yPosition = 100;
 let xPosition = 300;
 let zPosition = 0;
 let fuel = 100;
+const MASS = 20;
+const ENGENE_POSER = 100000;
 let setting = {
     "mute": true,
     "close": true,
     "hiddenHUG": false,
 }
+
+
 
 document.addEventListener("keydown", trakingMove);
 document.addEventListener("keyup", event => {
@@ -339,6 +388,7 @@ setInterval(() => {
     <div class="stateInfo">Y: ${ySpeed}</div>
     <div>z position ${zPosition.toFixed(3)}</div>
     <div>z speed ${zSpeed.toFixed(3)}</div>
+    <div>speed ${((ySpeed + xSpeed)/2).toFixed(3)}</div>
     <div>${fuel}</div><div>emp</div>`;
 }, 200);
 //__________________________________________
@@ -396,9 +446,13 @@ setInterval(() => {
 
 //GRAVITY CYCLE
 //__________________________________________
-// setInterval(() => {
-//     gravity(500, 100, 100, 50000000000);
-// }, 10)
+setInterval(() => {
+    gravity(900, 600, 100, 999999999999999);
+    gravity(2000, 1000, 100, 999999999999999);
+    CheckingSphericalHitbox(900, 600, 500, xPosition, yPosition, 20);
+    CheckingSphericalHitbox(2000, 1000, 500, xPosition, yPosition, 20);
+
+}, 10)
 //__________________________________________
 //__________________________________________
 //__________________________________________
