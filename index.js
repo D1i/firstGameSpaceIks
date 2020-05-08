@@ -50,14 +50,14 @@ function playAudio(event) {
     if (event.key !== "w" && event.key !== "s" && event.key !== "q" && event.key !== "e" || setting.mute) {
         return;
     }
-    document.querySelector(".audioEngen").play();
+    //document.querySelector(".audioEngen").play();
 }
 
 function stopAudio(event) {
     if (event.key !== "w" && event.key !== "d" && event.key !== "s" && event.key !== "a" && event.key !== "q" && event.key !== "e") {
         return;
     }
-    document.querySelector(".audioEngen").pause();
+    //document.querySelector(".audioEngen").pause();
 }
 //__________________________________________
 //__________________________________________
@@ -291,7 +291,6 @@ function CheckingSphericalHitbox(xSpheres, ySpheres, radiusSpheres, xObject, yOb
 }
 
 function planetLandscapeGeneration(xCoordinates, yCoordinates, planetSizes) {
-    debugger;
     planetSizes += 200;
     let code = "";
     let angle = 0;
