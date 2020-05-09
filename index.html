@@ -9,6 +9,8 @@
         body {
             height: 100vh;
             height: 100%;
+            padding: 0;
+            margin: 0;
         }
 
         .state {
@@ -108,7 +110,7 @@
     <title>!!!!!!!!!!!!!!!!!!!!</title>
     <link rel="stylesheet" href="styleConstructor.css">
 </head>
-<body>
+<body style="background-image: url(img/background.jpg)">
 <div class="state">ERROR</div>
 <div class="player"></div>
 <div class="infoOfSpaceShipsContainer">
@@ -148,6 +150,11 @@
     <input type="checkbox" class="hidenHUG"><div>HIDEN HUG</div>
 </div>
 
+<div mainScreen>
+    <div brightnessHolst style="background-color: #000; width: 100%; height: 100vh; z-index: 10; opacity: 1; position: absolute;"></div>
+    <div screenMoveObjects></div>
+    <div screenStaticObjects></div>
+</div>
 <!--<script src="index.js"></script>-->
 <script src="constructorShips.js"></script>
 <script src="index.js"></script>

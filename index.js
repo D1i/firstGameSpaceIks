@@ -11,6 +11,35 @@ const module3 = document.querySelector(".module3");
 const module4 = document.querySelector(".module4");
 const module5 = document.querySelector(".module5");
 const module6 = document.querySelector(".module6");
+
+let object1 = {
+    x: 100,
+    y: -800,
+}
+
+function moveObjects(object) {
+    object.x += -xSpeed;
+    object.y += -ySpeed;
+
+    return object;
+}
+
+function desplayMovement() {
+    xGlobalPosition += xSpeed;
+}
+
+function desplayOutput(staticObject, moveObject, updateFrequency, brightness) {
+    const mainScreen = document.body.querySelector('[mainScreen]');
+    const screenMoveObjects = document.body.querySelector('screenMoveObjects');
+    const screenStaticObjects = document.body.querySelector('[screenStaticObjects]');
+    const brightnessHolst = document.body.querySelector('[brightnessHolst]');
+        updateFrequency = (1000 / updateFrequency).toFixed(0);
+
+    brightnessHolst.style.opacity = brightness;
+
+    let screenRefresh = setInterval(()=>{}, updateFrequency)
+}
+
 // vector ; 1 = top; 0 = stay; -1 = bottom
 //BTN EVENTS
 //__________________________________________
@@ -181,6 +210,8 @@ function enertingZ(mass, engenePoser, key) {
 //__________________________________________
 function findingAnglesCoordinates (fromX, fromY, toX, toY) {
     //угол от x1;y1 к x2;y2
+
+    //ПРОБЛЕМА ТУТ
     let x = fromX - toX;
     let y = fromY - toY;
     let xValid = x;
@@ -247,32 +278,32 @@ function findingAnglesCoordinates (fromX, fromY, toX, toY) {
     }
 
 
-    if (document.querySelector(".gravityLine") !== null) {
-        document.querySelector(".gravityLine").remove();
-    }
-
     //console.log(angle);
 
-    let code = `
-    <div class="gravityLine" style="position: absolute; top: ${yPosition}px; left: ${xPosition}px; width: 5px; height: 200px; background-color: blueviolet; transform: rotate(${angle}deg)" ></div>
-    `
-    document.body.innerHTML += code;
 
     return angle;
 
 }
 
+//WRNING
+document.querySelector('[brightnessHolst]').style.opacity = 0
+
 function gravity(xPositionObject, yPositionObject, mass1, mass2) {
-    let distance = Math.sqrt(Math.pow(xPositionObject - xPosition, 2) + Math.pow(yPositionObject - yPosition, 2));//расстояние между центрами масс тел
+    let distance = Math.sqrt(Math.pow(xPositionObject - xGlobalPosition, 2) + Math.pow(yPositionObject - yGlobalPosition, 2));//расстояние между центрами масс тел
     let G = 6.67 * Math.pow(10, -11) * 10 * Math.pow(mass1, -1);// Гравитационная постоянная 6.67 *  10^-11 м3 кг^-1 с^-2
     let forceGravity = G * ( ( mass1 * mass2 ) / Math.pow(distance, 2) ); //Гравитационная сила
 
-    let course = findingAnglesCoordinates (xPosition, yPosition, xPositionObject, yPositionObject);
+    let course = findingAnglesCoordinates (xGlobalPosition, yGlobalPosition, xPositionObject, yPositionObject);
     let accelerationRatio = directionalEffect(course);
 
     ySpeed += forceGravity * accelerationRatio.y;
 
-    xSpeed += forceGravity * accelerationRatio.x;
+    console.log(course)
+    if (course < 180) {
+        xSpeed += forceGravity * -accelerationRatio.x;
+    } else {
+        xSpeed += forceGravity * accelerationRatio.x;
+    }
 
 
     //return {zPositionzPosition, forceGravity};
@@ -293,15 +324,22 @@ function CheckingSphericalHitbox(xSpheres, ySpheres, radiusSpheres, xObject, yOb
 function planetLandscapeGeneration(xCoordinates, yCoordinates, planetSizes) {
     planetSizes += 200;
     let code = "";
-    let angle = 0;
-    for (let i = 0; i < 100; i++) {
-        angle = i * (360 / 100);
-        code += `<div style="width: ${(planetSizes / 2).toFixed(0)}px; height: ${(planetSizes).toFixed(0)}px; background-color: #f00; transform: rotate(${angle}deg); top: ${xCoordinates - (planetSizes / 2).toFixed(0) + 150}px; left: ${yCoordinates - (planetSizes / 4).toFixed(0) }px; position: absolute;"></div>`
-    }
+
+
+    if (document.querySelector('.nfid2juu') !== null) {
+        document.querySelector('.nfid2juu').remove();}code += `<canvas width="${(planetSizes * 2).toFixed(0)}px" height="${(planetSizes * 2).toFixed(0)}px" class="nfid2juu" style="top: ${xCoordinates - (planetSizes).toFixed(0) + 150}px; left: ${yCoordinates - (planetSizes).toFixed(0) }px; position: absolute;"></canvas>`
     document.body.innerHTML += code;
+    let canvas = document.querySelector(".nfid2juu");
+    let planet = canvas.getContext('2d');
+    planet.beginPath();
+    planet.arc((planetSizes).toFixed(0), (planetSizes).toFixed(0), (planetSizes).toFixed(0), 0, Math.PI*2, true);
+    planet.fill();
+
+    //WARNING!
+
 }
 
-planetLandscapeGeneration(600, 900, 500)
+
 
 planetLandscapeGeneration(1000, 2000, 500)
 
@@ -309,12 +347,14 @@ let xSpeed = 0;
 let ySpeed = 0;
 let zSpeed = 0;
 let vector = 0;
-let yPosition = 100;
-let xPosition = 300;
+let yPosition = 300;
+let xPosition = 600;
 let zPosition = 0;
+let xGlobalPosition = 0;
+let yGlobalPosition = 0;
 let fuel = 100;
 const MASS = 20;
-const ENGENE_POSER = 100000;
+const ENGENE_POSER = 1000;
 let setting = {
     "mute": true,
     "close": true,
@@ -388,6 +428,11 @@ setInterval(() => {
     <div>z position ${zPosition.toFixed(3)}</div>
     <div>z speed ${zSpeed.toFixed(3)}</div>
     <div>speed ${((ySpeed + xSpeed)/2).toFixed(3)}</div>
+    <div>yGlobalPosition ${yGlobalPosition}</div>
+    <div>xGlobalPosition ${xGlobalPosition}</div>
+    <div>xPosition ${xPosition}</div>
+    <div>Символов ${document.body.innerHTML.length     //WARNING!
+        }</div>
     <div>${fuel}</div><div>emp</div>`;
 }, 200);
 //__________________________________________
@@ -405,8 +450,11 @@ setInterval(() => {
     if (zPosition < -180) {
         zPosition = 179;
     }
-    yPosition += ySpeed;
-    xPosition += xSpeed;
+    yGlobalPosition += ySpeed;
+    xGlobalPosition += xSpeed;
+
+    document.body.style.backgroundPosition = `${(-xGlobalPosition * 5).toFixed(0)}px ${(-yGlobalPosition * 5).toFixed(0)}px`;
+    //WARNING
     document.querySelector(".player").setAttribute("style", `top: ${yPosition}px; left: ${xPosition}px; transform: rotate(${zPosition}deg);`);
 }, 33);
 //__________________________________________
@@ -446,10 +494,11 @@ setInterval(() => {
 //GRAVITY CYCLE
 //__________________________________________
 setInterval(() => {
-    gravity(900, 600, 100, 999999999999999);
-    gravity(2000, 1000, 100, 999999999999999);
-    CheckingSphericalHitbox(900, 600, 500, xPosition, yPosition, 20);
-    CheckingSphericalHitbox(2000, 1000, 500, xPosition, yPosition, 20);
+    gravity(moveObjects(object1).x, moveObjects(object1).y, 100, 99999999999);
+    gravity(2000, 1000, 100, 99999999999);
+    //CheckingSphericalHitbox(moveObjects(object1).x, moveObjects(object1).y, 500, xGlobalPosition, yGlobalPosition, 20);
+    planetLandscapeGeneration(moveObjects(object1).y, moveObjects(object1).x, 500)
+    //CheckingSphericalHitbox(2000, 1000, 500, xGlobalPosition, yGlobalPosition, 20);
 
 }, 10)
 //__________________________________________
