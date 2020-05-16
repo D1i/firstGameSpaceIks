@@ -40,6 +40,11 @@ function desplayOutput(staticObject, moveObject, updateFrequency, brightness) {
     let screenRefresh = setInterval(()=>{}, updateFrequency)
 }
 
+function kill() {
+    document.body.style.background = "white";
+    document.body.innerHTML = "DOOM!";
+}
+
 // vector ; 1 = top; 0 = stay; -1 = bottom
 //BTN EVENTS
 //__________________________________________
@@ -188,6 +193,7 @@ function enerting(mass, engenePoser) {
         ySpeed += acceleration * editEnert.y;
         xSpeed += acceleration * editEnert.x;
     }
+
     if (vector === -1) {
         ySpeed += -acceleration * editEnert.y;
         xSpeed += -acceleration * editEnert.x;
@@ -298,7 +304,6 @@ function gravity(xPositionObject, yPositionObject, mass1, mass2) {
 
     ySpeed += forceGravity * accelerationRatio.y;
 
-    console.log(course)
     if (course < 180) {
         xSpeed += forceGravity * -accelerationRatio.x;
     } else {
@@ -311,15 +316,6 @@ function gravity(xPositionObject, yPositionObject, mass1, mass2) {
 //__________________________________________
 //__________________________________________
 //__________________________________________
-
-function CheckingSphericalHitbox(xSpheres, ySpheres, radiusSpheres, xObject, yObject, sizeObject) {
-    let angle = findingAnglesCoordinates(xSpheres, ySpheres, xObject, yObject);
-    let distanceBetweenPointSphereObject = Math.sqrt(Math.pow(Math.abs(ySpheres - yObject),2) + Math.pow(Math.abs(xSpheres - xObject),2));
-    if (distanceBetweenPointSphereObject < radiusSpheres) {
-        xSpeed = 0;
-        ySpeed = 0;
-    }
-}
 
 function planetLandscapeGeneration(xCoordinates, yCoordinates, planetSizes) {
     planetSizes += 200;
@@ -341,14 +337,12 @@ function planetLandscapeGeneration(xCoordinates, yCoordinates, planetSizes) {
 
 
 
-planetLandscapeGeneration(1000, 2000, 500)
+planetLandscapeGeneration(1000, 2000, 500);
 
 let xSpeed = 0;
 let ySpeed = 0;
 let zSpeed = 0;
 let vector = 0;
-let yPosition = 300;
-let xPosition = 600;
 let zPosition = 0;
 let xGlobalPosition = 0;
 let yGlobalPosition = 0;
@@ -359,7 +353,11 @@ let setting = {
     "mute": true,
     "close": true,
     "hiddenHUG": false,
-}
+    "screenHeight": 500,
+    "screenWidth": 500,
+};
+let yPosition = setting.screenHeight / 2;
+let xPosition = setting.screenWidth / 2;
 
 
 
@@ -423,11 +421,20 @@ document.addEventListener("keydown", event => {
 //RETURN DATA CYCLE
 //__________________________________________
 setInterval(() => {
+    let speadOfReturn = Math.abs(((ySpeed + xSpeed)/2).toFixed(3));
+    console.log(speadOfReturn)
+
+    if (speadOfReturn > 300000000) {
+        kill();
+    } else if (speadOfReturn > 1000) {
+        speadOfReturn = speadOfReturn / 1000 + ' КМ/С';
+    }
+
     document.querySelector(".state").innerHTML = `<div class="stateInfo">X: ${xSpeed}</div>
     <div class="stateInfo">Y: ${ySpeed}</div>
     <div>z position ${zPosition.toFixed(3)}</div>
     <div>z speed ${zSpeed.toFixed(3)}</div>
-    <div>speed ${((ySpeed + xSpeed)/2).toFixed(3)}</div>
+    <div>speed ${speadOfReturn}</div>
     <div>yGlobalPosition ${yGlobalPosition}</div>
     <div>xGlobalPosition ${xGlobalPosition}</div>
     <div>xPosition ${xPosition}</div>
@@ -453,7 +460,15 @@ setInterval(() => {
     yGlobalPosition += ySpeed;
     xGlobalPosition += xSpeed;
 
-    document.body.style.backgroundPosition = `${(-xGlobalPosition * 5).toFixed(0)}px ${(-yGlobalPosition * 5).toFixed(0)}px`;
+    let bodyElem = document.body;
+    let screen = document.querySelector("[brightnessHolst]");
+    bodyElem.style.backgroundPosition = `${(-xGlobalPosition / 10000).toFixed(0)}px ${(-yGlobalPosition / 10000).toFixed(0)}px`;
+    bodyElem.style.width = setting.screenWidth + "px";
+    bodyElem.style.height = setting.screenHeight + "px";
+
+    screen.style.backgroundPosition = `${(-xGlobalPosition / 10000).toFixed(0)}px ${(-yGlobalPosition / 10000).toFixed(0)}px`;
+    screen.style.width = setting.screenWidth + "px";
+    screen.style.height = setting.screenHeight + "px";
     //WARNING
     document.querySelector(".player").setAttribute("style", `top: ${yPosition}px; left: ${xPosition}px; transform: rotate(${zPosition}deg);`);
 }, 33);

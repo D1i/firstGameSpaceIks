@@ -1,0 +1,24 @@
+let xSpeed = 0;
+let ySpeed = 0;
+let zSpeed = 0;
+let vector = 0;
+let yPosition = 300;
+let xPosition = 600;
+let zPosition = 0;
+let xGlobalPosition = 0;
+let yGlobalPosition = 0;
+let fuel = 100;
+const MASS = 20;
+const ENGENE_POSER = 1000;
+let setting = {
+    "mute": true,
+    "close": true,
+    "hiddenHUG": false,
+}
+
+ХРАНИЛИЩЕ ОБЪЕКТОВ.
+OBJECT_LIST = [
+INFO_OBJECT_1: {
+	
+	},
+]

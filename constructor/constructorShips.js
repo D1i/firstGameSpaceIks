@@ -27,7 +27,7 @@ function generateCells(ySize, xSize, cellSize, scale, mapObjects) {
                 `
             } else  {
             code += `
-                    <div style="width: ${cellSize}px; height: ${cellSize}px; background-image: url(img/emplyCell.png); background-size: ${cellSize}px; position: absolute; left: ${xCoardinats}px; top: ${yCoardinats}px;" class="x${xRender} y${yRender}"></div>
+                    <div style="width: ${cellSize}px; height: ${cellSize}px; background-image: url(../img/emplyCell.png); background-size: ${cellSize}px; position: absolute; left: ${xCoardinats}px; top: ${yCoardinats}px;" class="x${xRender} y${yRender}"></div>
                     `
         }
         let cell;
@@ -47,13 +47,13 @@ function generateCells(ySize, xSize, cellSize, scale, mapObjects) {
 }
 
 document.querySelector(".menuOfSelect").innerHTML += `
-    <div class="armorPlateCell"><img src="img/armorPlateCell.png" alt="armorPlateCell" height=" 50px;" class="armorPlateCell">Защитная пластина. Прочность 200. Масса 100</div>
-    <div class="defualtCell"><img src="img/defualtCell.png" alt="defualtCell" height=" 50px;" class="defualtCell">Обшивка. Прочность 80. Масса 10</div>
-    <div class="fuelTank"><img src="img/fuelTank.png" alt="fuelTank" height=" 50px;" class="fuelTank">Топливный бак. Прочность 10. При уничтожении наносит 5 урона ближайшим блокам.Масса 100</div>
-    <div class="gun"><img src="img/gun.png" alt="gun" height=" 50px;" class="gun">Оружие.Прочность 100. Урон 200 за выстрел.Масса 70</div>
-    <div class="gunArmor"><img src="img/gunArmor.png" alt="gunArmor" height=" 50px;" class="gunArmor">Боезапас. Прочность 50. При уничтожениее нанаосит ближайшим блокам 200 урона.Масса 80</div>
-    <div class="controlBlock"><img src="img/controlBlock.png" alt="controlBlock" height=" 50px;" class="controlBlock">Командная рубка(лимит 3). Прочность 200. Масса 250. При уничтожении всех командных рубок кораболь самоуничтожается</div>
-    <div class="engine"><img src="img/engineTop.png" alt="engine" height=" 50px;" class="engine">Двигатель. Прочность 50. Масса 25. Тяга 2.5.</div>
+    <div class="armorPlateCell"><img src="../img/armorPlateCell.png" alt="armorPlateCell" height=" 50px;" class="armorPlateCell">Защитная пластина. Прочность 200. Масса 100</div>
+    <div class="defualtCell"><img src="../img/defualtCell.png" alt="defualtCell" height=" 50px;" class="defualtCell">Обшивка. Прочность 80. Масса 10</div>
+    <div class="fuelTank"><img src="../img/fuelTank.png" alt="fuelTank" height=" 50px;" class="fuelTank">Топливный бак. Прочность 10. При уничтожении наносит 5 урона ближайшим блокам.Масса 100</div>
+    <div class="gun"><img src="../img/gun.png" alt="gun" height=" 50px;" class="gun">Оружие.Прочность 100. Урон 200 за выстрел.Масса 70</div>
+    <div class="gunArmor"><img src="../img/gunArmor.png" alt="gunArmor" height=" 50px;" class="gunArmor">Боезапас. Прочность 50. При уничтожениее нанаосит ближайшим блокам 200 урона.Масса 80</div>
+    <div class="controlBlock"><img src="../img/controlBlock.png" alt="controlBlock" height=" 50px;" class="controlBlock">Командная рубка(лимит 3). Прочность 200. Масса 250. При уничтожении всех командных рубок кораболь самоуничтожается</div>
+    <div class="engine"><img src="../img/engineTop.png" alt="engine" height=" 50px;" class="engine">Двигатель. Прочность 50. Масса 25. Тяга 2.5.</div>
     `;
 
 document.querySelector(".constructorMatrice").innerHTML = generateCells(ySize, xSize, cellSize, 0, 1213);
@@ -83,10 +83,10 @@ function contextMenuForEngine(open) {
     if (open) {
         document.querySelector(".menuOfSelect").innerHTML += `
     <div class="contextMenuForEngine" style=" position: absolute; right: -40px; bottom: 0;">
-        <div class="engineTop"><img src="img/engineTop.png" alt="engineTop" height=" 50px;" class="engineTop">Двигатель направленный вверх</div>
-        <div class="engineRight"><img src="img/engineRight.png" alt="engineRight" height=" 50px;" class="engineRight">Двигатель направленный вправо</div>
-        <div class="engineBottom"><img src="img/engineBottom.png" alt="engineBottom" height=" 50px;" class="engineBottom">Двигатель направленный вниз</div>
-        <div class="engineLeft"><img src="img/engineLeft.png" alt="engineLeft" height=" 50px;" class="engineLeft">Двигатель направленный влево</div>
+        <div class="engineTop"><img src="../img/engineTop.png" alt="engineTop" height=" 50px;" class="engineTop">Двигатель направленный вверх</div>
+        <div class="engineRight"><img src="../img/engineRight.png" alt="engineRight" height=" 50px;" class="engineRight">Двигатель направленный вправо</div>
+        <div class="engineBottom"><img src="../img/engineBottom.png" alt="engineBottom" height=" 50px;" class="engineBottom">Двигатель направленный вниз</div>
+        <div class="engineLeft"><img src="../img/engineLeft.png" alt="engineLeft" height=" 50px;" class="engineLeft">Двигатель направленный влево</div>
     </div>
     `;
     }
