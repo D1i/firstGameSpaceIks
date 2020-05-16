@@ -22,3 +22,13 @@ INFO_OBJECT_1: {
 	
 	},
 ]
+
+sectorID - arr
+unitID - arr
+subUnitID - arr
+layerChunksID - arr
+congestionChunksID - arr
+ChunksID - arr
+objectID - obj
+
+

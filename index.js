@@ -217,77 +217,45 @@ function enertingZ(mass, engenePoser, key) {
 function findingAnglesCoordinates (fromX, fromY, toX, toY) {
     //угол от x1;y1 к x2;y2
 
-    //ПРОБЛЕМА ТУТ
-    let x = fromX - toX;
-    let y = fromY - toY;
-    let xValid = x;
-    let yValid = y;
-    let angle;
-    if (x < 0) {
-        x *= -1;
-    }if (y < 0) {
-        y *= -1;
+    let x = toX - fromX;
+    let y = toY - fromY;
+
+    // console.log(`toX: ${toX}, toY: ${toY},
+    // fromX: ${fromX}, fromY: ${fromY},
+    // `)
+
+
+    let angle = -Math.atan((y / x)) * 57.2958;
+
+    if (x === 0 && y > 0) {
+        return 0;
+    }
+    if (x > 0 && y === 0) {
+        return 90;
+    }
+    if (x === 0 && y < 0) {
+        return 180;
+    }
+    if (x < 0 && y === 0) {
+        return 270;
     }
 
-    let XYStatus = {x: false, y: false,};
-
-    // if (x > y) {
-        // y-a
-        // x-b
-        angle = -Math.atan((y / x)) * 57.2958;
-
-
-    // } else {
-    //     // y-b
-    //     // x-a
-    //     angle = Math.atan((x / y)) * 57.2958;
-    // }
-
-    if (xValid > 0 && yValid > 0) {
-        angle = (angle - 270) * -1;
-        //console.log("1")
+    if (x > 0 && y > 0) {
+        // console.log(`X: ${x}, Y: ${y}, angle: ${90 + angle}`);
+        return 90 + angle;
     }
-    if (xValid > 0 && yValid < 0) {
-        angle += 270;
-        //console.log("2")
+    if (x > 0 && y < 0) {
+        // console.log(`X: ${x}, Y: ${y}, angle: ${180 - angle}`);
+        return 180 - angle;
     }
-    if (xValid < 0 && yValid < 0) {
-       angle = (angle - 90) * -1;
-        //console.log("3")
+    if (x < 0 && y < 0) {
+        // console.log(`X: ${x}, Y: ${y}, angle: ${180 + -angle}`);
+        return 180 + -angle;
     }
-    if (xValid < 0 && yValid > 0) {
-        angle += 90;
-        //console.log("12")
+    if (x < 0 && y > 0) {
+        // console.log(`X: ${x}, Y: ${y}, angle: ${270 + angle}`);
+        return 270 + angle;
     }
-
-   // if (xValid === 0 && yValid === 0) { return }//STOP
-    if (xValid === 0 && yValid > 0) {
-        angle += 0;
-        //console.log("4")
-    }
-    if (xValid === 0 && yValid < 0) {
-        angle += 180;
-        //console.log("5")
-    }
-    if (xValid > 0 && yValid === 0) {
-        angle += 270;
-        //console.log("6")
-    }
-    if (xValid < 0 && yValid === 0) {
-        angle += 90;
-        console.log("6")
-    }
-
-    if (angle < 0) {
-        angle += 0;
-
-    }
-
-
-    //console.log(angle);
-
-
-    return angle;
 
 }
 
@@ -302,13 +270,10 @@ function gravity(xPositionObject, yPositionObject, mass1, mass2) {
     let course = findingAnglesCoordinates (xGlobalPosition, yGlobalPosition, xPositionObject, yPositionObject);
     let accelerationRatio = directionalEffect(course);
 
-    ySpeed += forceGravity * accelerationRatio.y;
-
-    if (course < 180) {
-        xSpeed += forceGravity * -accelerationRatio.x;
-    } else {
-        xSpeed += forceGravity * accelerationRatio.x;
-    }
+    // ySpeed += forceGravity * accelerationRatio.y;
+    //     xSpeed += forceGravity * -accelerationRatio.x;
+    //
+    // console.log(`X: ${accelerationRatio.x} Y ${accelerationRatio.y}`)
 
 
     //return {zPositionzPosition, forceGravity};
@@ -510,7 +475,6 @@ setInterval(() => {
 //__________________________________________
 setInterval(() => {
     gravity(moveObjects(object1).x, moveObjects(object1).y, 100, 99999999999);
-    gravity(2000, 1000, 100, 99999999999);
     //CheckingSphericalHitbox(moveObjects(object1).x, moveObjects(object1).y, 500, xGlobalPosition, yGlobalPosition, 20);
     planetLandscapeGeneration(moveObjects(object1).y, moveObjects(object1).x, 500)
     //CheckingSphericalHitbox(2000, 1000, 500, xGlobalPosition, yGlobalPosition, 20);
