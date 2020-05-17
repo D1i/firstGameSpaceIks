@@ -1,10 +1,10 @@
 "use strict";
 
-let level = [[[[[{"obj": {"width":10,"height":10,"X":100,"Y":100,"positionZ":0,"type":"square"},}]]]]];
+let level = [[[[[{"obj": {"width": 10, "height": 10, "X": 100, "Y": 100, "positionZ": 0, "type": "square"},}]]]]];
 
 function CheckingSphericalHitbox(xSpheres, ySpheres, radiusSpheres, xObject, yObject, sizeObject) {
     let angle = findingAnglesCoordinates(xSpheres, ySpheres, xObject, yObject);
-    let distanceBetweenPointSphereObject = Math.sqrt(Math.pow(Math.abs(ySpheres - yObject),2) + Math.pow(Math.abs(xSpheres - xObject),2));
+    let distanceBetweenPointSphereObject = Math.sqrt(Math.pow(Math.abs(ySpheres - yObject), 2) + Math.pow(Math.abs(xSpheres - xObject), 2));
     if (distanceBetweenPointSphereObject < radiusSpheres) {
         xSpeed = 0;
         ySpeed = 0;
@@ -12,9 +12,8 @@ function CheckingSphericalHitbox(xSpheres, ySpheres, radiusSpheres, xObject, yOb
 }
 
 
-
 class HitboxContact {
-    constructor (firstObjectID, secondObjectID) {
+    constructor(firstObjectID, secondObjectID) {
         this._firstObject = level[firstObjectID.sectorID][firstObjectID.unitID][firstObjectID.subUnitID][firstObjectID.layerChunksID][firstObjectID.congestionChunksID][firstObjectID.ChunksID][firstObjectID];
         this._secondObject = level[secondObjectID.sectorID][secondObjectID.unitID][secondObjectID.subUnitID][secondObjectID.layerChunksID][secondObjectID.congestionChunksID][secondObjectID.ChunksID][secondObjectID];
 
@@ -29,7 +28,7 @@ class HitboxContact {
 
         if (this._firstObject.type === "circular") {
             if (this._secondObject.type === "circular") {
-                this.contactSquareWithCircular_SC( this._secondObject, this._firstObject);
+                this.contactSquareWithCircular_SC(this._secondObject, this._firstObject);
             }
             if (this._secondObject.type === "circular") {
                 this.contactCircularWithCircular_CC(this._firstObject, this._secondObject);
@@ -44,7 +43,7 @@ class HitboxContact {
             if (((firstObject.Y + (firstObject.height / 2) >= secondObject.Y + (secondObject.height / 2)) && (firstObject.Y - (firstObject.height / 2) <= secondObject.Y + (secondObject.height / 2))) ||
                 (((firstObject.Y + (firstObject.height / 2) >= secondObject.Y - (secondObject.height / 2)) && (firstObject.Y - (firstObject.height / 2) <= secondObject.Y - (secondObject.height / 2))))) {
                 console.log("tick")
-             }
+            }
         }
     }
 
@@ -56,14 +55,14 @@ class HitboxContact {
         let angle = determinationDirection(circular.X, circular.Y, square.X, square.Y);//угол. От центра круга к квадрату.
         let circularX = directionalEffect(angle).x * (circular.diameter / 2);
         let circularY = directionalEffect(angle).y * (circular.diameter / 2);
-
+        //Временное решение.
         if ((y1 >= circularY) && (y2 >= circularY) && (x1 >= circularX) && (x2 <= circularX)) {
             console.log("tick");
         }
     }
 
     contactCircularWithCircular_CC(firstObject, secondObject) {
-        let distanceBetweenPointSphereObject = Math.sqrt(Math.pow(Math.abs(firstObject.Y - secondObject.Y),2) + Math.pow(Math.abs(firstObject.X - secondObject.X),2));
+        let distanceBetweenPointSphereObject = Math.sqrt(Math.pow(Math.abs(firstObject.Y - secondObject.Y), 2) + Math.pow(Math.abs(firstObject.X - secondObject.X), 2));
         if (distanceBetweenPointSphereObject <= ((firstObject.diameter + secondObject.diameter) / 2)) {
             console.log("tick");
 
@@ -120,10 +119,12 @@ function directionalEffect(z) {
         if (z < 45) {
             directionalXSpeed = z * angleToSpeed;
             directionalYSpeed = (90 - z) * -angleToSpeed;
-        } if (z === 45) {
+        }
+        if (z === 45) {
             directionalXSpeed = 45 * -angleToSpeed;
             directionalYSpeed = 45 * -angleToSpeed;
-        } if (z > 45) {
+        }
+        if (z > 45) {
             directionalYSpeed = (90 - z) * -angleToSpeed;
             directionalXSpeed = z * angleToSpeed;
         }
@@ -133,10 +134,12 @@ function directionalEffect(z) {
         if (z < 45) {
             directionalYSpeed = z * angleToSpeed;
             directionalXSpeed = (90 - z) * angleToSpeed;
-        } if (z === 45) {
+        }
+        if (z === 45) {
             directionalYSpeed = 45 * angleToSpeed;
             directionalXSpeed = 45 * angleToSpeed;
-        } if (z > 45) {
+        }
+        if (z > 45) {
             directionalXSpeed = (90 - z) * angleToSpeed;
             directionalYSpeed = z * angleToSpeed;
         }
@@ -146,10 +149,12 @@ function directionalEffect(z) {
         if (z < 45) {
             directionalXSpeed = z * -angleToSpeed;
             directionalYSpeed = (90 - z) * angleToSpeed;
-        } if (z === 45) {
+        }
+        if (z === 45) {
             directionalYSpeed = 45 * angleToSpeed;
             directionalXSpeed = 45 * angleToSpeed;
-        } if (z > 45) {
+        }
+        if (z > 45) {
             directionalYSpeed = (90 - z) * angleToSpeed;
             directionalXSpeed = z * -angleToSpeed;
         }
@@ -159,10 +164,12 @@ function directionalEffect(z) {
         if (z < 45) {
             directionalYSpeed = z * -angleToSpeed;
             directionalXSpeed = (90 - z) * -angleToSpeed;
-        } if (z === 45) {
+        }
+        if (z === 45) {
             directionalXSpeed = 45 * -angleToSpeed;
             directionalYSpeed = 45 * angleToSpeed;
-        } if (z > 45) {
+        }
+        if (z > 45) {
             directionalXSpeed = (90 - z) * -angleToSpeed;
             directionalYSpeed = z * -angleToSpeed;
         }

@@ -1,4 +1,4 @@
-"use strict"
+"use strict";
 
 // rules 100000 units === 1m/s
 
@@ -33,11 +33,12 @@ function desplayOutput(staticObject, moveObject, updateFrequency, brightness) {
     const screenMoveObjects = document.body.querySelector('screenMoveObjects');
     const screenStaticObjects = document.body.querySelector('[screenStaticObjects]');
     const brightnessHolst = document.body.querySelector('[brightnessHolst]');
-        updateFrequency = (1000 / updateFrequency).toFixed(0);
+    updateFrequency = (1000 / updateFrequency).toFixed(0);
 
     brightnessHolst.style.opacity = brightness;
 
-    let screenRefresh = setInterval(()=>{}, updateFrequency)
+    let screenRefresh = setInterval(() => {
+    }, updateFrequency)
 }
 
 function kill() {
@@ -74,6 +75,7 @@ function checkBtn(key) {
     }
 
 }
+
 //__________________________________________
 //__________________________________________
 //__________________________________________
@@ -93,6 +95,7 @@ function stopAudio(event) {
     }
     //document.querySelector(".audioEngen").pause();
 }
+
 //__________________________________________
 //__________________________________________
 //__________________________________________
@@ -127,10 +130,12 @@ function directionalEffect(z) {
         if (z < 45) {
             directionalXSpeed = z * angleToSpeed;
             directionalYSpeed = (90 - z) * -angleToSpeed;
-        } if (z === 45) {
+        }
+        if (z === 45) {
             directionalXSpeed = 45 * -angleToSpeed;
             directionalYSpeed = 45 * -angleToSpeed;
-        } if (z > 45) {
+        }
+        if (z > 45) {
             directionalYSpeed = (90 - z) * -angleToSpeed;
             directionalXSpeed = z * angleToSpeed;
         }
@@ -140,10 +145,12 @@ function directionalEffect(z) {
         if (z < 45) {
             directionalYSpeed = z * angleToSpeed;
             directionalXSpeed = (90 - z) * angleToSpeed;
-        } if (z === 45) {
+        }
+        if (z === 45) {
             directionalYSpeed = 45 * angleToSpeed;
             directionalXSpeed = 45 * angleToSpeed;
-        } if (z > 45) {
+        }
+        if (z > 45) {
             directionalXSpeed = (90 - z) * angleToSpeed;
             directionalYSpeed = z * angleToSpeed;
         }
@@ -153,10 +160,12 @@ function directionalEffect(z) {
         if (z < 45) {
             directionalXSpeed = z * -angleToSpeed;
             directionalYSpeed = (90 - z) * angleToSpeed;
-        } if (z === 45) {
+        }
+        if (z === 45) {
             directionalYSpeed = 45 * angleToSpeed;
             directionalXSpeed = 45 * angleToSpeed;
-        } if (z > 45) {
+        }
+        if (z > 45) {
             directionalYSpeed = (90 - z) * angleToSpeed;
             directionalXSpeed = z * -angleToSpeed;
         }
@@ -166,10 +175,12 @@ function directionalEffect(z) {
         if (z < 45) {
             directionalYSpeed = z * -angleToSpeed;
             directionalXSpeed = (90 - z) * -angleToSpeed;
-        } if (z === 45) {
+        }
+        if (z === 45) {
             directionalXSpeed = 45 * -angleToSpeed;
             directionalYSpeed = 45 * angleToSpeed;
-        } if (z > 45) {
+        }
+        if (z > 45) {
             directionalXSpeed = (90 - z) * -angleToSpeed;
             directionalYSpeed = z * -angleToSpeed;
         }
@@ -186,7 +197,7 @@ function directionalEffect(z) {
 }
 
 function enerting(mass, engenePoser) {
-    let acceleration = ( engenePoser / mass ) / 1000;//evry 1 ms
+    let acceleration = (engenePoser / mass) / 1000;//evry 1 ms
     const editEnert = directionalEffect(zPosition);
 
     if (vector === 1) {
@@ -208,13 +219,14 @@ function enertingZ(mass, engenePoser, key) {
         zSpeed -= acceleration;
     }
 }
+
 //__________________________________________
 //__________________________________________
 //__________________________________________
 
 //GRAVITY EVENTS
 //__________________________________________
-function findingAnglesCoordinates (fromX, fromY, toX, toY) {
+function findingAnglesCoordinates(fromX, fromY, toX, toY) {
     //угол от x1;y1 к x2;y2
 
     let x = toX - fromX;
@@ -265,9 +277,9 @@ document.querySelector('[brightnessHolst]').style.opacity = 0
 function gravity(xPositionObject, yPositionObject, mass1, mass2) {
     let distance = Math.sqrt(Math.pow(xPositionObject - xGlobalPosition, 2) + Math.pow(yPositionObject - yGlobalPosition, 2));//расстояние между центрами масс тел
     let G = 6.67 * Math.pow(10, -11) * 10 * Math.pow(mass1, -1);// Гравитационная постоянная 6.67 *  10^-11 м3 кг^-1 с^-2
-    let forceGravity = G * ( ( mass1 * mass2 ) / Math.pow(distance, 2) ); //Гравитационная сила
+    let forceGravity = G * ((mass1 * mass2) / Math.pow(distance, 2)); //Гравитационная сила
 
-    let course = findingAnglesCoordinates (xGlobalPosition, yGlobalPosition, xPositionObject, yPositionObject);
+    let course = findingAnglesCoordinates(xGlobalPosition, yGlobalPosition, xPositionObject, yPositionObject);
     let accelerationRatio = directionalEffect(course);
 
     // ySpeed += forceGravity * accelerationRatio.y;
@@ -278,6 +290,7 @@ function gravity(xPositionObject, yPositionObject, mass1, mass2) {
 
     //return {zPositionzPosition, forceGravity};
 }
+
 //__________________________________________
 //__________________________________________
 //__________________________________________
@@ -288,18 +301,19 @@ function planetLandscapeGeneration(xCoordinates, yCoordinates, planetSizes) {
 
 
     if (document.querySelector('.nfid2juu') !== null) {
-        document.querySelector('.nfid2juu').remove();}code += `<canvas width="${(planetSizes * 2).toFixed(0)}px" height="${(planetSizes * 2).toFixed(0)}px" class="nfid2juu" style="top: ${xCoordinates - (planetSizes).toFixed(0) + 150}px; left: ${yCoordinates - (planetSizes).toFixed(0) }px; position: absolute;"></canvas>`
+        document.querySelector('.nfid2juu').remove();
+    }
+    code += `<canvas width="${(planetSizes * 2).toFixed(0)}px" height="${(planetSizes * 2).toFixed(0)}px" class="nfid2juu" style="top: ${xCoordinates - (planetSizes).toFixed(0) + 150}px; left: ${yCoordinates - (planetSizes).toFixed(0) }px; position: absolute;"></canvas>`
     document.body.innerHTML += code;
     let canvas = document.querySelector(".nfid2juu");
     let planet = canvas.getContext('2d');
     planet.beginPath();
-    planet.arc((planetSizes).toFixed(0), (planetSizes).toFixed(0), (planetSizes).toFixed(0), 0, Math.PI*2, true);
+    planet.arc((planetSizes).toFixed(0), (planetSizes).toFixed(0), (planetSizes).toFixed(0), 0, Math.PI * 2, true);
     planet.fill();
 
     //WARNING!
 
 }
-
 
 
 planetLandscapeGeneration(1000, 2000, 500);
@@ -323,7 +337,6 @@ let setting = {
 };
 let yPosition = setting.screenHeight / 2;
 let xPosition = setting.screenWidth / 2;
-
 
 
 document.addEventListener("keydown", trakingMove);
@@ -371,13 +384,13 @@ document.addEventListener("keydown", event => {
     if (event.key !== "Escape") {
         return;
     }
-        if (setting.close) {
-            setting.close = false;
-            document.querySelector(".settingGame").style.display = "flex";
-        } else {
-            setting.close = true;
-            document.querySelector(".settingGame").style.display = "none";
-        }
+    if (setting.close) {
+        setting.close = false;
+        document.querySelector(".settingGame").style.display = "flex";
+    } else {
+        setting.close = true;
+        document.querySelector(".settingGame").style.display = "none";
+    }
 });
 //__________________________________________
 //__________________________________________
@@ -386,7 +399,7 @@ document.addEventListener("keydown", event => {
 //RETURN DATA CYCLE
 //__________________________________________
 setInterval(() => {
-    let speadOfReturn = Math.abs(((ySpeed + xSpeed)/2).toFixed(3));
+    let speadOfReturn = Math.abs(((ySpeed + xSpeed) / 2).toFixed(3));
     console.log(speadOfReturn)
 
     if (speadOfReturn > 300000000) {
@@ -451,7 +464,7 @@ setInterval(() => {
     module5.style.backgroundColor = "#0f0";
     module6.style.backgroundColor = "#0f0";
 
-},500)
+}, 500)
 //__________________________________________
 //__________________________________________
 //__________________________________________

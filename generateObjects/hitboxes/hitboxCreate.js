@@ -26,7 +26,7 @@ class SetCoordinates {
     }
 }
 
-class EditCoordinates extends SetCoordinates{
+class EditCoordinates extends SetCoordinates {
     editPositionX(x) {
         this._positionX += x;
     }

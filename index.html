@@ -25,12 +25,14 @@
             right: 0;
         }
 
-        .state > div {}
+        .state > div {
+        }
 
         .player {
             width: 50px;
             height: 200px;
-            background: #ccc url(img/angle.png) center no-repeat; background-size: 50px;
+            background: #ccc url(img/angle.png) center no-repeat;
+            background-size: 50px;
             -webkit-background-size: 50px;
             background-size: 50px;
             transform-origin: center;
@@ -114,44 +116,47 @@
 <div class="state">ERROR</div>
 <div class="player"></div>
 <div class="infoOfSpaceShipsContainer">
-<div class="infoOfSpaceShips">
-    <div class="module1"></div>
-    <div class="module2"></div>
-    <div class="module3"></div>
-    <div class="module4"></div>
-    <div class="module5"></div>
-    <div class="module6"></div>
-</div>
+    <div class="infoOfSpaceShips">
+        <div class="module1"></div>
+        <div class="module2"></div>
+        <div class="module3"></div>
+        <div class="module4"></div>
+        <div class="module5"></div>
+        <div class="module6"></div>
+    </div>
 </div>
 <!--<div class="constructorWindow">-->
-    <!--<div class="timedInfo">-->
-    <!--<h1>Приветствую всех в конструкторе.</h1>-->
-    <!--<h3>На стрелочки вы сдвигаете камеру конструктора.<br>-->
-        <!--Не совертую баловаться с перемещением, когда вы датрагиваетесь камерой до левой или верхней части коробля,<br>-->
-        <!--с некоторым шансом произойдет баг и ваш корабль превратится в кашу.</h3>-->
-    <!--</div>-->
-    <!--<div class="menuOfSelect"></div>-->
-    <!--<div class="constructorMatrice"></div>-->
-    <!--<button class="shiftTopConstructor"></button>-->
-    <!--<button class="shiftRightConstructor"></button>-->
-    <!--<button class="shiftBottomConstructor"></button>-->
-    <!--<button class="shiftLeftConstructor"></button>-->
-    <!--<button class="shiftCenterConstructor"></button>-->
-    <!--<button class="closeContructor"></button>-->
-    <!--<button class="BTNOFSAVE" style="position: absolute; top: 100px;">SAVE</button>-->
-    <!--<div class="blockOfSave">Тут появится код, который нужно скопирывать и скинуть максу.<br> P.S Скобочки тоже {}</div>-->
+<!--<div class="timedInfo">-->
+<!--<h1>Приветствую всех в конструкторе.</h1>-->
+<!--<h3>На стрелочки вы сдвигаете камеру конструктора.<br>-->
+<!--Не совертую баловаться с перемещением, когда вы датрагиваетесь камерой до левой или верхней части коробля,<br>-->
+<!--с некоторым шансом произойдет баг и ваш корабль превратится в кашу.</h3>-->
+<!--</div>-->
+<!--<div class="menuOfSelect"></div>-->
+<!--<div class="constructorMatrice"></div>-->
+<!--<button class="shiftTopConstructor"></button>-->
+<!--<button class="shiftRightConstructor"></button>-->
+<!--<button class="shiftBottomConstructor"></button>-->
+<!--<button class="shiftLeftConstructor"></button>-->
+<!--<button class="shiftCenterConstructor"></button>-->
+<!--<button class="closeContructor"></button>-->
+<!--<button class="BTNOFSAVE" style="position: absolute; top: 100px;">SAVE</button>-->
+<!--<div class="blockOfSave">Тут появится код, который нужно скопирывать и скинуть максу.<br> P.S Скобочки тоже {}</div>-->
 <!--</div>-->
 <!--<div style="width: 1000px; height: 1000px; position: absolute; top: 200px; left: 500px; background: teal url(img/angle.png) center no-repeat; background-size: 100px; border-radius: 50%"></div>-->
 
 <!--<audio class="audioEngen" style="width: 100px; height: 20px; display: block;" autoplay loop="loop" src="music/manevr.mp3"></audio>-->
 
 <div class="settingGame">
-    <input type="checkbox" class="muteGame" checked><div>MUTE GAME</div>
-    <input type="checkbox" class="hidenHUG"><div>HIDEN HUG</div>
+    <input type="checkbox" class="muteGame" checked>
+    <div>MUTE GAME</div>
+    <input type="checkbox" class="hidenHUG">
+    <div>HIDEN HUG</div>
 </div>
 
 <div mainScreen>
-    <div brightnessHolst style="background-color: #000; width: 100%; height: 100vh; z-index: 10; opacity: 1; position: absolute;"></div>
+    <div brightnessHolst
+         style="background-color: #000; width: 100%; height: 100vh; z-index: 10; opacity: 1; position: absolute;"></div>
     <div screenMoveObjects></div>
     <div screenStaticObjects></div>
 </div>

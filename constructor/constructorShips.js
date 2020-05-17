@@ -20,12 +20,12 @@ function generateCells(ySize, xSize, cellSize, scale, mapObjects) {
     let xRender = 0;
     let xCoardinats = 0;
     let yCoardinats = 0;
-    for (;cells > 0; cells--) {
-            if (shipMapSave[`x${xRender} y${yRender}`]) {
-                code += `
+    for (; cells > 0; cells--) {
+        if (shipMapSave[`x${xRender} y${yRender}`]) {
+            code += `
                     <div style="width: ${cellSize}px; height: ${cellSize}px; background-image: url(img/${shipMapSave[`x${xRender} y${yRender}`]}); background-size: ${cellSize}px; position: absolute; left: ${xCoardinats}px; top: ${yCoardinats}px;" class="x${xRender} y${yRender}"></div>
                 `
-            } else  {
+        } else {
             code += `
                     <div style="width: ${cellSize}px; height: ${cellSize}px; background-image: url(../img/emplyCell.png); background-size: ${cellSize}px; position: absolute; left: ${xCoardinats}px; top: ${yCoardinats}px;" class="x${xRender} y${yRender}"></div>
                     `
@@ -65,7 +65,7 @@ document.querySelector(".constructorMatrice").addEventListener("click", event =>
         if (selectCell !== "emplyCell.png") {
             shipMapSave[event.target.getAttribute("class")] = selectCell;
         }
-    } else  {
+    } else {
         event.target.style.backgroundImage = 'url("img/emplyCell.png")';
         delete shipMapSave[event.target.getAttribute("class")];
     }
@@ -151,8 +151,8 @@ function getCodeOfSaveMapShip() {
 function findNumberInString(str) {
     // FORMAT OF IMPUT: STR = x000 y000
     let numbersForReturn = {};
-    for (let i = 0;  str.length > i; i++) {
-        if (12);
+    for (let i = 0; str.length > i; i++) {
+        if (12) ;
         if (typeof (parseFloat(str[i])) === "number" && !isNaN(str[i])) {
             if (str[i + 2] === "y") {
                 numbersForReturn.x = (Number(str[i]))
@@ -160,9 +160,9 @@ function findNumberInString(str) {
                 numbersForReturn.x = (Number(str[i] + str[i + 1]));
                 i++
             } else if (str[i + 4] === "y") {
-                numbersForReturn.x = (Number(str[i] + str[i + 1] +  str[i + 2]));
+                numbersForReturn.x = (Number(str[i] + str[i + 1] + str[i + 2]));
                 i += 2
-            }else if (str[i + 1] === "y") {
+            } else if (str[i + 1] === "y") {
                 i++;
             } else if (str[i + 1] === undefined) {
                 numbersForReturn.y = (Number(str[i]))
@@ -282,7 +282,7 @@ function shipDimensions(ship) {
 function actionBack() {
     shipMapSave = {};
     for (let key in backVersionMapShip) {
-        shipMapSave[key] = backVersionMapShip[key ];
+        shipMapSave[key] = backVersionMapShip[key];
     }
     document.querySelector(".constructorMatrice").innerHTML = generateCells(ySize, xSize, cellSize, 0, 1213)
 }
