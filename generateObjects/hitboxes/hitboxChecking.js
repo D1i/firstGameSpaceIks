@@ -184,3 +184,5 @@ function directionalEffect(z) {
 
     return {y: directionalYSpeed, x: directionalXSpeed,};
 }
+
+// import {HitboxContact} from '../../index.js';

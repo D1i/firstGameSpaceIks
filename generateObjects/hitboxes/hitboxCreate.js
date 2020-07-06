@@ -129,3 +129,5 @@ Hitbox.create = {
     "square": Square,
     "circular": Circular,
 };
+
+// import {Hitbox.create} from '../../index.js';
